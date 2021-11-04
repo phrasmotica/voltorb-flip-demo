@@ -3,8 +3,11 @@ import React from "react"
 import { GridState, VoltorbFlipGrid } from "./VoltorbFlipGrid"
 
 interface VoltorbFlipProps {
+    level: number
     grid: VoltorbFlipGrid
     flipCell: (row: number, col: number) => void
+    nextLevel: () => void
+    reset: () => void
 }
 
 export const VoltorbFlip = (props: VoltorbFlipProps) => {
@@ -13,58 +16,95 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
             <div>
                 {range(grid.size()).map(i => (
                     <div className="flip-grid-row">
-                        {range(grid.size()).map(j => renderCell(i, j))}
+                        {range(grid.size()).map(j => renderCell(grid, i, j))}
 
-                        {renderRowStats(i)}
+                        {renderRowStats(grid, i)}
                     </div>
                 ))}
 
                 <div className="flip-grid-row">
-                    {range(grid.size()).map(j => renderColStats(j))}
+                    {range(grid.size()).map(j => renderColStats(grid, j))}
                 </div>
             </div>
         )
     }
 
-    const renderCell = (row: number, col: number) => {
-        let cell = props.grid.getCell(row, col)
+    const renderCell = (grid: VoltorbFlipGrid, row: number, col: number) => {
+        let cell = grid.getCell(row, col)
+
+        let contents = <span>?</span>
+        let className = "cell-button"
+
+        let finished = grid.getState() !== GridState.Pending
+
+        if (finished) {
+            contents = <span>{cell.value}</span>
+            className += " shown"
+
+            if (cell.value === 0) {
+                contents = <span>V</span>
+                className += " voltorb"
+            }
+        }
+
+        if (cell.flipped) {
+            contents = <span>{cell.value}</span>
+            className += " flipped"
+
+            if (cell.value === 0) {
+                contents = <span>V</span>
+                className += " voltorb"
+            }
+        }
 
         return (
             <div className="flip-grid-cell">
-                <button onClick={() => props.flipCell(row, col)}>
-                    {cell.flipped ? (cell.value === 0 ? "V" : cell.value) : "?"}
+                <button className={className} onClick={() => props.flipCell(row, col)}>
+                    {contents}
                 </button>
             </div>
         )
     }
 
-    const renderRowStats = (row: number) => (
+    const renderRowStats = (grid: VoltorbFlipGrid, row: number) => (
         <div className="stats">
-            {props.grid.getRowTotal(row)}, {props.grid.countVoltorbsInRow(row)}
+            {grid.getRowTotal(row)}, {grid.countVoltorbsInRow(row)}
         </div>
     )
 
-    const renderColStats = (col: number) => (
+    const renderColStats = (grid: VoltorbFlipGrid, col: number) => (
         <div className="stats">
-            {props.grid.getColTotal(col)}, {props.grid.countVoltorbsInCol(col)}
+            {grid.getColTotal(col)}, {grid.countVoltorbsInCol(col)}
         </div>
     )
 
     const renderGridState = (grid: VoltorbFlipGrid) => {
-        let text = "Pending..."
-        switch (grid?.getState()) {
-            case GridState.Won:
-                text = "Won!"
-                break;
+        let state = grid?.getState()
 
-            case GridState.Lost:
-                text = "Lost."
-                break;
-        }
+        let coinCount = `Coins: ${grid?.getScore() ?? 0}`
+        let levelText = `Level: ${props.level + 1}`
 
         return (
-            <div>
-                {text}
+            <div className="grid-state">
+                <div>
+                    {levelText}
+                </div>
+
+                <div>
+                    {coinCount}
+                </div>
+
+                <div>
+                    <button disabled={state !== GridState.Won} onClick={props.nextLevel}>
+                        Next Level
+                    </button>
+                </div>
+
+                <div>
+                    <button onClick={props.reset}>
+                        Reset
+                    </button>
+                </div>
             </div>
         )
     }
