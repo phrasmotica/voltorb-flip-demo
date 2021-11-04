@@ -180,6 +180,10 @@ export class VoltorbFlipGrid {
 
         return flippedCells.map(c => c.value).reduce((i, j) => i * j)
     }
+
+    getNumberOfFlippedMultipliers() {
+        return this.grid.flatMap(row => row).filter(c => c.value > 0 && c.flipped).length
+    }
 }
 
 export class VoltorbFlipCell {

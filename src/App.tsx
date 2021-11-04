@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 import { VoltorbFlip } from "./VoltorbFlip"
-import { VoltorbFlipGrid } from "./VoltorbFlipGrid"
+import { GridState, VoltorbFlipGrid } from "./VoltorbFlipGrid"
 
 import "./App.css"
 
@@ -16,8 +16,22 @@ const App = () => {
         setGrid(new VoltorbFlipGrid(grid.grid))
     }
 
-    const nextLevel = () => {
-        let newLevel = Math.min(7, level + 1)
+    // https://bulbapedia.bulbagarden.net/wiki/Voltorb_Flip
+    const nextLevel = (grid: VoltorbFlipGrid) => {
+        let newLevel = level
+
+        let state = grid.getState()
+        if (state === GridState.Won) {
+            newLevel = Math.min(7, level + 1)
+        }
+
+        if (state === GridState.Lost) {
+            let numFlippedMultipliers = grid.getNumberOfFlippedMultipliers()
+            if (numFlippedMultipliers < level + 1) {
+                newLevel = Math.min(7, numFlippedMultipliers - 1)
+            }
+        }
+
         setLevel(newLevel)
         setGrid(newGrid(newLevel))
     }

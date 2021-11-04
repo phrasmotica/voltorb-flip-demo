@@ -6,7 +6,7 @@ interface VoltorbFlipProps {
     level: number
     grid: VoltorbFlipGrid
     flipCell: (row: number, col: number) => void
-    nextLevel: () => void
+    nextLevel: (grid: VoltorbFlipGrid) => void
     reset: () => void
 }
 
@@ -95,7 +95,7 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
                 </div>
 
                 <div>
-                    <button disabled={state !== GridState.Won} onClick={props.nextLevel}>
+                    <button disabled={state === GridState.Pending} onClick={() => props.nextLevel(grid)}>
                         Next Level
                     </button>
                 </div>
