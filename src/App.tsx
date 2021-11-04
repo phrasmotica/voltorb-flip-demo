@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { VoltorbFlip } from "./VoltorbFlip"
+import { VoltorbFlipGrid } from "./VoltorbFlipGrid"
+
+import "./App.css"
+
+const newGrid = () => VoltorbFlipGrid.create()
+
+const App = () => {
+    const [grid, setGrid] = useState(newGrid())
+
+    const flipCell = (row: number, col: number) => {
+        grid.getCell(row, col).flip()
+        setGrid(new VoltorbFlipGrid(grid.grid))
+    }
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                <VoltorbFlip grid={grid} flipCell={flipCell} />
+            </header>
+        </div>
+    )
 }
 
-export default App;
+export default App
