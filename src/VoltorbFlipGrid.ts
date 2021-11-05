@@ -180,6 +180,23 @@ export class VoltorbFlipGrid {
         return cellValues.filter(i => i === 0).length
     }
 
+    rowIsDead(row: number) {
+        return this.cellsAreDead(this.grid[row])
+    }
+
+    colIsDead(col: number) {
+        return this.cellsAreDead(this.grid.map(row => row[col]))
+    }
+
+    private cellsAreDead(cells: VoltorbFlipCell[]) {
+        let numVoltorbs = cells.filter(c => c.value === 0).length
+        let sum = cells.map(c => c.value).reduce((i, j) => i + j)
+        let numTwosFlipped = cells.filter(c => c.value === 2 && c.flipped).length
+        let numThreesFlipped = cells.filter(c => c.value === 3 && c.flipped).length
+
+        return numVoltorbs + sum - 5 <= numTwosFlipped + 2 * numThreesFlipped
+    }
+
     getScore() {
         let flippedCells = this.grid.flatMap(row => row).filter(c => c.flipped)
         if (flippedCells.length <= 0) {

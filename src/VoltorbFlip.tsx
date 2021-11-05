@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 import { GridState, VoltorbFlipGrid } from "./VoltorbFlipGrid"
 
 interface VoltorbFlipProps {
@@ -10,6 +12,8 @@ interface VoltorbFlipProps {
 }
 
 export const VoltorbFlip = (props: VoltorbFlipProps) => {
+    const [showDeadZones, setShowDeadCells] = useState(false)
+
     const renderGrid = (grid: VoltorbFlipGrid) => {
         return (
             <div>
@@ -65,27 +69,39 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
         )
     }
 
-    const renderRowStats = (grid: VoltorbFlipGrid, row: number) => (
-        <div className="stats">
-            {grid.getRowTotal(row)}, {grid.countVoltorbsInRow(row)}
-        </div>
-    )
+    const renderRowStats = (grid: VoltorbFlipGrid, row: number) => {
+        let showDead = showDeadZones && grid.rowIsDead(row)
+        let deadText = showDead ? "dead" : ""
 
-    const renderColStats = (grid: VoltorbFlipGrid, col: number) => (
-        <div className="stats">
-            {grid.getColTotal(col)}, {grid.countVoltorbsInCol(col)}
-        </div>
-    )
+        return (
+            <div className="stats">
+                <div>{grid.getRowTotal(row)}, {grid.countVoltorbsInRow(row)}</div>
+                <div>{deadText}</div>
+            </div>
+        )
+    }
+
+    const renderColStats = (grid: VoltorbFlipGrid, col: number) => {
+        let showDead = showDeadZones && grid.colIsDead(col)
+        let deadText = showDead ? "dead" : ""
+
+        return (
+            <div className="stats">
+                <div>{grid.getColTotal(col)}, {grid.countVoltorbsInCol(col)}</div>
+                <div>{deadText}</div>
+            </div>
+        )
+    }
 
     const renderGridState = (grid: VoltorbFlipGrid) => (
-            <div className="grid-state">
-                <div>
+        <div className="grid-state">
+            <div>
                 Level: {props.level}
-                </div>
+            </div>
 
-                <div>
+            <div>
                 Coins: {props.score}
-                </div>
+            </div>
 
             <div>
                 Coins this round: {grid?.getScore() ?? 0}
@@ -108,6 +124,15 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
                     <button onClick={props.reset}>
                         Reset
                     </button>
+                </div>
+
+                <div>
+                    <label>
+                        <input type="checkbox" onChange={e => setShowDeadCells(e.target.checked)}>
+
+                        </input>
+                        Show dead zones
+                    </label>
                 </div>
             </div>
         )
