@@ -2,6 +2,7 @@ import { GridState, VoltorbFlipGrid } from "./VoltorbFlipGrid"
 
 interface VoltorbFlipProps {
     level: number
+    score: number
     grid: VoltorbFlipGrid
     flipCell: (row: number, col: number) => void
     nextLevel: (grid: VoltorbFlipGrid) => void
@@ -79,6 +80,7 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
     const renderGridState = (grid: VoltorbFlipGrid) => {
         let state = grid?.getState()
 
+        let coinCount = `Coins: ${props.score + (grid?.getScore() ?? 0)}`
         let levelText = `Level: ${props.level}`
 
         return (

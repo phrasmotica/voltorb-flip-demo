@@ -9,6 +9,7 @@ const newGrid = (level: number) => VoltorbFlipGrid.create(level)
 
 const App = () => {
     const [level, setLevel] = useState(1)
+    const [score, setScore] = useState(0)
     const [grid, setGrid] = useState(newGrid(level))
 
     const flipCell = (row: number, col: number) => {
@@ -23,6 +24,7 @@ const App = () => {
         let state = grid.getState()
         if (state === GridState.Won) {
             newLevel = Math.min(8, level + 1)
+            setScore(score + grid.getScore())
         }
 
         if (state === GridState.Lost) {
@@ -46,6 +48,7 @@ const App = () => {
             <header className="App-header">
                 <VoltorbFlip
                     level={level}
+                    score={score}
                     grid={grid}
                     flipCell={flipCell}
                     nextLevel={nextLevel}
