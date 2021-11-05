@@ -77,22 +77,27 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
         </div>
     )
 
-    const renderGridState = (grid: VoltorbFlipGrid) => {
-        let state = grid?.getState()
-
-        let coinCount = `Coins: ${props.score + (grid?.getScore() ?? 0)}`
-        let levelText = `Level: ${props.level}`
-
-        return (
+    const renderGridState = (grid: VoltorbFlipGrid) => (
             <div className="grid-state">
                 <div>
-                    {levelText}
+                Level: {props.level}
                 </div>
 
                 <div>
-                    {coinCount}
+                Coins: {props.score}
                 </div>
 
+            <div>
+                Coins this round: {grid?.getScore() ?? 0}
+            </div>
+        </div>
+    )
+
+    const renderGridOptions = (grid: VoltorbFlipGrid) => {
+        let state = grid?.getState()
+
+        return (
+            <div className="grid-options">
                 <div>
                     <button disabled={state === GridState.Pending} onClick={() => props.nextLevel(grid)}>
                         Next Level
@@ -112,6 +117,7 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
         <div>
             {renderGrid(props.grid)}
             {renderGridState(props.grid)}
+            {renderGridOptions(props.grid)}
         </div>
     )
 }
