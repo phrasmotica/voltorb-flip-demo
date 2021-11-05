@@ -1,5 +1,3 @@
-import React from "react"
-
 import { GridState, VoltorbFlipGrid } from "./VoltorbFlipGrid"
 
 interface VoltorbFlipProps {
@@ -81,8 +79,7 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
     const renderGridState = (grid: VoltorbFlipGrid) => {
         let state = grid?.getState()
 
-        let coinCount = `Coins: ${grid?.getScore() ?? 0}`
-        let levelText = `Level: ${props.level + 1}`
+        let levelText = `Level: ${props.level}`
 
         return (
             <div className="grid-state">

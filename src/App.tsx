@@ -8,7 +8,7 @@ import "./App.css"
 const newGrid = (level: number) => VoltorbFlipGrid.create(level)
 
 const App = () => {
-    const [level, setLevel] = useState(0)
+    const [level, setLevel] = useState(1)
     const [grid, setGrid] = useState(newGrid(level))
 
     const flipCell = (row: number, col: number) => {
@@ -22,13 +22,13 @@ const App = () => {
 
         let state = grid.getState()
         if (state === GridState.Won) {
-            newLevel = Math.min(7, level + 1)
+            newLevel = Math.min(8, level + 1)
         }
 
         if (state === GridState.Lost) {
             let numFlippedMultipliers = grid.getNumberOfFlippedMultipliers()
-            if (numFlippedMultipliers < level + 1) {
-                newLevel = Math.min(7, numFlippedMultipliers - 1)
+            if (numFlippedMultipliers < level) {
+                newLevel = Math.max(1, Math.min(8, level, numFlippedMultipliers))
             }
         }
 
@@ -37,8 +37,8 @@ const App = () => {
     }
 
     const reset = () => {
-        setLevel(0)
-        setGrid(newGrid(0))
+        setLevel(1)
+        setGrid(newGrid(1))
     }
 
     return (

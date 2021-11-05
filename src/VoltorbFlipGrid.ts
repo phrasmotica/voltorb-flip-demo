@@ -14,6 +14,7 @@ const createGrid = (size: number, numVoltorbs: number, numTwos: number, numThree
 // https://bulbapedia.bulbagarden.net/wiki/Voltorb_Flip
 const levelParameters = [
     {
+        level: 1,
         size: 5,
         cellsOptions: [
             createGrid(5, 6, 3, 1),
@@ -24,6 +25,7 @@ const levelParameters = [
         ],
     },
     {
+        level: 2,
         size: 5,
         cellsOptions: [
             createGrid(5, 7, 1, 3),
@@ -34,6 +36,7 @@ const levelParameters = [
         ],
     },
     {
+        level: 3,
         size: 5,
         cellsOptions: [
             createGrid(5, 8, 2, 3),
@@ -44,6 +47,7 @@ const levelParameters = [
         ],
     },
     {
+        level: 4,
         size: 5,
         cellsOptions: [
             createGrid(5, 8, 3, 3),
@@ -54,6 +58,7 @@ const levelParameters = [
         ],
     },
     {
+        level: 5,
         size: 5,
         cellsOptions: [
             createGrid(5, 10, 7, 1),
@@ -64,6 +69,7 @@ const levelParameters = [
         ],
     },
     {
+        level: 6,
         size: 5,
         cellsOptions: [
             createGrid(5, 10, 3, 4),
@@ -74,6 +80,7 @@ const levelParameters = [
         ],
     },
     {
+        level: 7,
         size: 5,
         cellsOptions: [
             createGrid(5, 10, 7, 2),
@@ -84,6 +91,7 @@ const levelParameters = [
         ],
     },
     {
+        level: 8,
         size: 5,
         cellsOptions: [
             createGrid(5, 10, 0, 7),
@@ -111,7 +119,7 @@ export class VoltorbFlipGrid {
     static create(level: number) {
         let newGrid = []
 
-        let parameters = levelParameters[level]
+        let parameters = levelParameters.find(p => p.level === level)!
 
         let cells = randomFrom(parameters.cellsOptions)
 
