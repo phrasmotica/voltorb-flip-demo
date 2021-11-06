@@ -80,6 +80,7 @@
   margin: 0px 10px;
   align-items: center;
   justify-content: space-between;
+  font-size: 12pt;
 }
 
 .grid-options {
@@ -87,4 +88,5 @@
   margin: 0px 10px;
   align-items: center;
   justify-content: space-between;
+  font-size: 12pt;
 }

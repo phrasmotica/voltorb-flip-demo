@@ -10,6 +10,7 @@ const newGrid = (level: number) => VoltorbFlipGrid.create(level)
 const App = () => {
     const [level, setLevel] = useState(1)
     const [score, setScore] = useState(0)
+    const [streak, setStreak] = useState(0)
     const [grid, setGrid] = useState(newGrid(level))
 
     const flipCell = (row: number, col: number) => {
@@ -20,10 +21,19 @@ const App = () => {
     // https://bulbapedia.bulbagarden.net/wiki/Voltorb_Flip
     const nextLevel = (grid: VoltorbFlipGrid) => {
         let newLevel = level
+        let newStreak = 0
 
         let state = grid.getState()
         if (state === GridState.Won) {
-            newLevel = Math.min(8, level + 1)
+            newStreak = streak + 1
+
+            if (newStreak >= 5) {
+                newLevel = 8
+            }
+            else {
+                newLevel = Math.min(8, level + 1)
+            }
+
             setScore(score + grid.getScore())
         }
 
@@ -35,11 +45,13 @@ const App = () => {
         }
 
         setLevel(newLevel)
+        setStreak(newStreak)
         setGrid(newGrid(newLevel))
     }
 
     const reset = () => {
         setLevel(1)
+        setStreak(0)
         setGrid(newGrid(1))
     }
 
@@ -48,6 +60,7 @@ const App = () => {
             <header className="App-header">
                 <VoltorbFlip
                     level={level}
+                    streak={streak}
                     score={score}
                     grid={grid}
                     flipCell={flipCell}

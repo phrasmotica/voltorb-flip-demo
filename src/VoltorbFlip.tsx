@@ -4,6 +4,7 @@ import { GridState, VoltorbFlipGrid } from "./VoltorbFlipGrid"
 
 interface VoltorbFlipProps {
     level: number
+    streak: number
     score: number
     grid: VoltorbFlipGrid
     flipCell: (row: number, col: number) => void
@@ -97,6 +98,10 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
         <div className="grid-state">
             <div>
                 Level: {props.level}
+            </div>
+
+            <div>
+                Streak: {props.streak}
             </div>
 
             <div>
