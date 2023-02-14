@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { Cell } from "./Cell"
+import { Stats } from "./Stats"
 
 import { GridState, VoltorbFlipGrid } from "./VoltorbFlipGrid"
 
@@ -35,63 +37,24 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
 
     const renderCell = (grid: VoltorbFlipGrid, row: number, col: number) => {
         let cell = grid.getCell(row, col)
+        let gridState = grid.getState()
+        let showDead = !cell.flipped && showDeadZones && (grid.rowIsDead(row) || grid.colIsDead(col))
 
-        let contents = <span>?</span>
-        let className = "cell-button"
+        const flipCell = () => props.flipCell(row, col)
 
-        let finished = grid.getState() !== GridState.Pending
-
-        if (finished) {
-            contents = <span>{cell.value}</span>
-            className += " shown"
-
-            if (cell.value === 0) {
-                contents = <span>V</span>
-                className += " voltorb"
-            }
-        }
-
-        if (cell.flipped) {
-            contents = <span>{cell.value}</span>
-            className += " flipped"
-
-            if (cell.value === 0) {
-                contents = <span>V</span>
-                className += " voltorb"
-            }
-        }
-
-        return (
-            <div className="flip-grid-cell">
-                <button className={className} onClick={() => props.flipCell(row, col)}>
-                    {contents}
-                </button>
-            </div>
-        )
+        return <Cell cell={cell} gridState={gridState} showDead={showDead} flipCell={flipCell} />
     }
 
     const renderRowStats = (grid: VoltorbFlipGrid, row: number) => {
-        let showDead = showDeadZones && grid.rowIsDead(row)
-        let deadText = showDead ? "dead" : ""
+        let showDeadZone = showDeadZones && grid.rowIsDead(row)
 
-        return (
-            <div className="stats">
-                <div>{grid.getRowTotal(row)}, {grid.countVoltorbsInRow(row)}</div>
-                <div>{deadText}</div>
-            </div>
-        )
+        return <Stats cells={grid.getRow(row)} showDeadZone={showDeadZone} />
     }
 
     const renderColStats = (grid: VoltorbFlipGrid, col: number) => {
-        let showDead = showDeadZones && grid.colIsDead(col)
-        let deadText = showDead ? "dead" : ""
+        let showDeadZone = showDeadZones && grid.colIsDead(col)
 
-        return (
-            <div className="stats">
-                <div>{grid.getColTotal(col)}, {grid.countVoltorbsInCol(col)}</div>
-                <div>{deadText}</div>
-            </div>
-        )
+        return <Stats cells={grid.getCol(col)} showDeadZone={showDeadZone} />
     }
 
     const renderGridState = (grid: VoltorbFlipGrid) => (

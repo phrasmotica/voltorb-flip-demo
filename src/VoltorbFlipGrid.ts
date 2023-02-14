@@ -162,12 +162,20 @@ export class VoltorbFlipGrid {
         return this.grid[row][col]
     }
 
+    getRow(row: number) {
+        return this.grid[row]
+    }
+
     getRowTotal(row: number) {
-        return this.grid[row].map(c => c.value).reduce((i, j) => i + j)
+        return this.getRow(row).map(c => c.value).reduce((i, j) => i + j)
+    }
+
+    getCol(col: number) {
+        return this.grid.map(row => row[col])
     }
 
     getColTotal(col: number) {
-        let cellValues = this.grid.map(row => row[col]).map(c => c.value)
+        let cellValues = this.getCol(col).map(c => c.value)
         return cellValues.reduce((i, j) => i + j)
     }
 

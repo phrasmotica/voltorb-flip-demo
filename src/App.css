@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: mediumseagreen;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -42,9 +42,15 @@
 }
 
 .flip-grid-cell {
-  padding: 8px;
+  margin: 2px;
+  padding: 5px;
   width: 50px;
   height: 50px;
+}
+
+.flip-grid-cell.dead {
+  background-color: rgba(165, 42, 42, 0.8);
+  border-radius: calc(2rem / 7);
 }
 
 .cell-button {
@@ -70,9 +76,11 @@
   font-size: 12pt;
   text-align: center;
   margin: 5px;
-  border: 3px dotted white;
+  border: 2px dashed white;
+  border-radius: calc(2rem / 7);
   width: 50px;
   height: 50px;
+  background-color: green;
 }
 
 .grid-state {
