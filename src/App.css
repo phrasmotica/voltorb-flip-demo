@@ -2,17 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: mediumseagreen;
   min-height: 100vh;
@@ -24,58 +13,64 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+h4 {
+  margin-top: 0rem!important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.container > :not(:first-child) {
+  margin-top: 0.5rem;
+  border-top: 1px solid white;
+  padding-top: 0.5rem;
 }
 
 .flip-grid-row {
   display: flex;
+  align-items: center;
 }
 
 .flip-grid-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 2px;
   padding: 5px;
-  width: 50px;
-  height: 50px;
+  border-radius: calc(2rem / 7);
 }
 
 .flip-grid-cell.dead {
   background-color: rgba(165, 42, 42, 0.8);
-  border-radius: calc(2rem / 7);
 }
 
-.cell-button {
-  width: 100%;
-  height: 100%;
-  font-size: 16pt;
+.ui.button.cell-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin-right: 0px;
 }
 
-.cell-button.flipped {
+.ui.button.cell-button.shown {
   background-color: pink;
-  font-weight: bold;
 }
 
-.cell-button.shown {
-  font-weight: bold;
+.ui.button.cell-button.flipped {
+  opacity: 1!important;
+  background-color: pink;
 }
 
-.cell-button.flipped.voltorb {
+.ui.button.cell-button.voltorb {
+  opacity: 1!important;
   background-color: red;
 }
 
 .stats {
   font-size: 12pt;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3px;
   text-align: center;
-  margin: 5px;
   border: 2px dashed white;
   border-radius: calc(2rem / 7);
   width: 50px;
@@ -85,7 +80,6 @@
 
 .grid-state {
   display: flex;
-  margin: 0px 10px;
   align-items: center;
   justify-content: space-between;
   font-size: 12pt;
@@ -93,8 +87,11 @@
 
 .grid-options {
   display: flex;
-  margin: 0px 10px;
   align-items: center;
   justify-content: space-between;
   font-size: 12pt;
+}
+
+.ui.checkbox.option-checkbox > label {
+  color: white!important;
 }

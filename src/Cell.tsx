@@ -1,3 +1,5 @@
+import { Button } from "semantic-ui-react"
+
 import { GridState, VoltorbFlipCell } from "./VoltorbFlipGrid"
 
 interface CellProps {
@@ -43,9 +45,12 @@ export const Cell = (props: CellProps) => {
 
     return (
         <div className={parentClassName}>
-            <button className={className} onClick={props.flipCell}>
+            <Button
+                className={className}
+                disabled={finished || cell.flipped}
+                onClick={props.flipCell}>
                 {contents}
-            </button>
+            </Button>
         </div>
     )
 }

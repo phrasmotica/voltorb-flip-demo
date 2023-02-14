@@ -58,6 +58,10 @@ const App = () => {
     return (
         <div className="App">
             <header className="App-header">
+                <h1>Voltorb Flip</h1>
+
+                <h4>A clone of the beloved mini-game from Pok&eacute;mon HeartGold and SoulSilver.</h4>
+
                 <VoltorbFlip
                     level={level}
                     streak={streak}

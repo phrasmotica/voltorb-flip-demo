@@ -1,4 +1,7 @@
 import { useState } from "react"
+import { Popup } from "semantic-ui-react"
+import Button from "semantic-ui-react/dist/commonjs/elements/Button"
+import Checkbox from "semantic-ui-react/dist/commonjs/modules/Checkbox"
 import { Cell } from "./Cell"
 import { Stats } from "./Stats"
 
@@ -15,7 +18,7 @@ interface VoltorbFlipProps {
 }
 
 export const VoltorbFlip = (props: VoltorbFlipProps) => {
-    const [showDeadZones, setShowDeadCells] = useState(false)
+    const [showDeadCells, setShowDeadCells] = useState(false)
 
     const renderGrid = (grid: VoltorbFlipGrid) => {
         return (
@@ -38,7 +41,7 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
     const renderCell = (grid: VoltorbFlipGrid, row: number, col: number) => {
         let cell = grid.getCell(row, col)
         let gridState = grid.getState()
-        let showDead = !cell.flipped && showDeadZones && (grid.rowIsDead(row) || grid.colIsDead(col))
+        let showDead = !cell.flipped && showDeadCells && (grid.rowIsDead(row) || grid.colIsDead(col))
 
         const flipCell = () => props.flipCell(row, col)
 
@@ -46,13 +49,13 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
     }
 
     const renderRowStats = (grid: VoltorbFlipGrid, row: number) => {
-        let showDeadZone = showDeadZones && grid.rowIsDead(row)
+        let showDeadZone = showDeadCells && grid.rowIsDead(row)
 
         return <Stats cells={grid.getRow(row)} showDeadZone={showDeadZone} />
     }
 
     const renderColStats = (grid: VoltorbFlipGrid, col: number) => {
-        let showDeadZone = showDeadZones && grid.colIsDead(col)
+        let showDeadZone = showDeadCells && grid.colIsDead(col)
 
         return <Stats cells={grid.getCol(col)} showDeadZone={showDeadZone} />
     }
@@ -82,32 +85,47 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
 
         return (
             <div className="grid-options">
-                <div>
-                    <button disabled={state === GridState.Pending} onClick={() => props.nextLevel(grid)}>
+                <Popup
+                    content="Move to the next level!"
+                    position="bottom left"
+                    mouseEnterDelay={500}
+                    disabled={state === GridState.Pending}
+                    trigger={
+                    <Button
+                        disabled={state === GridState.Pending}
+                        onClick={() => props.nextLevel(grid)}>
                         Next Level
-                    </button>
-                </div>
+                    </Button>
+                } />
 
-                <div>
-                    <button onClick={props.reset}>
+                <Popup
+                    content="Start a new game from level 1."
+                    position="bottom center"
+                    mouseEnterDelay={500}
+                    trigger={
+                    <Button
+                        onClick={props.reset}>
                         Reset
-                    </button>
-                </div>
+                    </Button>
+                } />
 
-                <div>
-                    <label>
-                        <input type="checkbox" onChange={e => setShowDeadCells(e.target.checked)}>
-
-                        </input>
-                        Show dead zones
-                    </label>
-                </div>
+                <Popup
+                    content="Highlight cells that MUST contain either 1 coin or a Voltorb, based on current information."
+                    position="bottom right"
+                    mouseEnterDelay={500}
+                    trigger={
+                    <Checkbox
+                        className="option-checkbox"
+                        label="Show dead cells"
+                        checked={showDeadCells}
+                        onChange={(e, data) => setShowDeadCells(data.checked ?? false)} />
+                } />
             </div>
         )
     }
 
     return (
-        <div>
+        <div className="container">
             {renderGrid(props.grid)}
             {renderGridState(props.grid)}
             {renderGridOptions(props.grid)}

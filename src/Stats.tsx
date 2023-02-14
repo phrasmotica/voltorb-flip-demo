@@ -12,9 +12,11 @@ export const Stats = (props: StatsProps) => {
     let voltorbCount = props.cells.filter(a => a.value === 0).length
 
     return (
-        <div className="stats">
-            <div>{total}, {voltorbCount}</div>
-            <div>{deadText}</div>
+        <div className="flip-grid-cell">
+            <div className="stats">
+                <div>{total}, {voltorbCount}</div>
+                {deadText && <div>{deadText}</div>}
+            </div>
         </div>
     )
 }
