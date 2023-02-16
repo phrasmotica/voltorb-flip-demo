@@ -27,12 +27,12 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
                     <div className="flip-grid-row">
                         {range(grid.size()).map(j => renderCell(grid, i, j))}
 
-                        {renderRowStats(grid, i)}
+                        <Stats cells={grid.getRow(i)} />
                     </div>
                 ))}
 
                 <div className="flip-grid-row">
-                    {range(grid.size()).map(j => renderColStats(grid, j))}
+                    {range(grid.size()).map(j => <Stats cells={grid.getCol(j)} />)}
                 </div>
             </div>
         )
@@ -48,34 +48,26 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
         return <Cell cell={cell} gridState={gridState} showDead={showDead} flipCell={flipCell} />
     }
 
-    const renderRowStats = (grid: VoltorbFlipGrid, row: number) => {
-        let showDeadZone = showDeadCells && grid.rowIsDead(row)
-
-        return <Stats cells={grid.getRow(row)} showDeadZone={showDeadZone} />
-    }
-
-    const renderColStats = (grid: VoltorbFlipGrid, col: number) => {
-        let showDeadZone = showDeadCells && grid.colIsDead(col)
-
-        return <Stats cells={grid.getCol(col)} showDeadZone={showDeadZone} />
-    }
-
     const renderGridState = (grid: VoltorbFlipGrid) => (
         <div className="grid-state">
-            <div>
-                Level: {props.level}
+            <div style={{ textAlign: "start" }}>
+                <div>
+                    Level: {props.level}
+                </div>
+
+                <div>
+                    Streak: {props.streak}
+                </div>
             </div>
 
-            <div>
-                Streak: {props.streak}
-            </div>
+            <div style={{ textAlign: "end" }}>
+                <div>
+                    Coins: {props.score}
+                </div>
 
-            <div>
-                Coins: {props.score}
-            </div>
-
-            <div>
-                Coins this round: {grid?.getScore() ?? 0}
+                <div>
+                    Coins this round: {grid?.getScore() ?? 0}
+                </div>
             </div>
         </div>
     )
