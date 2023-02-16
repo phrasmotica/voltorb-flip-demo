@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/voltorb-flip-demo/static/css/main.c42881de.chunk.css",
-    "main.js": "/voltorb-flip-demo/static/js/main.98559d9f.chunk.js",
-    "main.js.map": "/voltorb-flip-demo/static/js/main.98559d9f.chunk.js.map",
+    "main.css": "/voltorb-flip-demo/static/css/main.9d36bda3.chunk.css",
+    "main.js": "/voltorb-flip-demo/static/js/main.f47c541d.chunk.js",
+    "main.js.map": "/voltorb-flip-demo/static/js/main.f47c541d.chunk.js.map",
     "runtime-main.js": "/voltorb-flip-demo/static/js/runtime-main.8903911a.js",
     "runtime-main.js.map": "/voltorb-flip-demo/static/js/runtime-main.8903911a.js.map",
     "static/js/2.8f0cb7cb.chunk.js": "/voltorb-flip-demo/static/js/2.8f0cb7cb.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.3fc012b0.chunk.js": "/voltorb-flip-demo/static/js/3.3fc012b0.chunk.js",
     "static/js/3.3fc012b0.chunk.js.map": "/voltorb-flip-demo/static/js/3.3fc012b0.chunk.js.map",
     "index.html": "/voltorb-flip-demo/index.html",
-    "static/css/main.c42881de.chunk.css.map": "/voltorb-flip-demo/static/css/main.c42881de.chunk.css.map",
+    "static/css/main.9d36bda3.chunk.css.map": "/voltorb-flip-demo/static/css/main.9d36bda3.chunk.css.map",
     "static/js/2.8f0cb7cb.chunk.js.LICENSE.txt": "/voltorb-flip-demo/static/js/2.8f0cb7cb.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.8903911a.js",
     "static/js/2.8f0cb7cb.chunk.js",
-    "static/css/main.c42881de.chunk.css",
-    "static/js/main.98559d9f.chunk.js"
+    "static/css/main.9d36bda3.chunk.css",
+    "static/js/main.f47c541d.chunk.js"
   ]
 }
