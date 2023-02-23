@@ -1,3 +1,4 @@
+import { PButton } from "./PButton"
 import { GridState, VoltorbFlipCell } from "./VoltorbFlipGrid"
 
 interface CellProps {
@@ -44,9 +45,9 @@ export const Cell = (props: CellProps) => {
 
     return (
         <div className={parentClassName}>
-            <div className={className} onClick={props.flipCell}>
+            <PButton className={className} onClick={props.flipCell}>
                 {contents}
-            </div>
+            </PButton>
         </div>
     )
 }

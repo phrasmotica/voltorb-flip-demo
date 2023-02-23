@@ -41,20 +41,30 @@ h4 {
   background-color: rgba(165, 42, 42, 0.8);
 }
 
-.cell-button {
+.pbutton {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 80px;
   border: 1px solid white;
   border-radius: calc(2rem / 7);
   cursor: pointer;
-  font-size: 24pt;
+  padding: 0.5em 1em;
 }
 
-.cell-button:hover {
+.pbutton.disabled {
+  opacity: 0.3!important;
+  cursor: default;
+}
+
+.pbutton:hover:not(.disabled) {
   background-color: rgba(211, 211, 211, 0.5);
+}
+
+.cell-button {
+  width: 80px;
+  height: 80px;
+  font-size: 24pt;
+  padding: 0em;
 }
 
 .cell-button.shown {

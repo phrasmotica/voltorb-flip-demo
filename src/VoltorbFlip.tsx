@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { Popup } from "semantic-ui-react"
-import Button from "semantic-ui-react/dist/commonjs/elements/Button"
 import Checkbox from "semantic-ui-react/dist/commonjs/modules/Checkbox"
-import { Cell } from "./Cell"
-import { Stats } from "./Stats"
 
+import { Cell } from "./Cell"
+import { PButton } from "./PButton"
+import { Stats } from "./Stats"
 import { GridState, VoltorbFlipGrid } from "./VoltorbFlipGrid"
 
 interface VoltorbFlipProps {
@@ -83,11 +83,11 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
                     mouseEnterDelay={500}
                     disabled={state === GridState.Pending}
                     trigger={
-                    <Button
+                    <PButton
                         disabled={state === GridState.Pending}
                         onClick={() => props.nextLevel(grid)}>
                         Next Level
-                    </Button>
+                    </PButton>
                 } />
 
                 <Popup
@@ -95,10 +95,10 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
                     position="bottom center"
                     mouseEnterDelay={500}
                     trigger={
-                    <Button
+                    <PButton
                         onClick={props.reset}>
                         Reset
-                    </Button>
+                    </PButton>
                 } />
 
                 <Popup
