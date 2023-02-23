@@ -41,17 +41,16 @@ h4 {
   background-color: rgba(165, 42, 42, 0.8);
 }
 
-/* TODO: make these look nicer on devices of different sizes */
 .cell-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 80px;
+  height: 80px;
   border: 1px solid white;
   border-radius: calc(2rem / 7);
   cursor: pointer;
-  font-size: 14pt;
+  font-size: 24pt;
 }
 
 .cell-button:hover {
@@ -88,9 +87,10 @@ h4 {
   text-align: center;
   border: 2px dashed white;
   border-radius: calc(2rem / 7);
-  width: 40px;
-  height: 40px;
+  width: 80px;
+  height: 80px;
   background-color: green;
+  font-size: 16pt;
 }
 
 .grid-state {
@@ -109,4 +109,32 @@ h4 {
 
 .ui.checkbox.option-checkbox > label {
   color: white!important;
+}
+
+@media screen and (max-width: 768px) {
+  .cell-button {
+    width: 60px;
+    height: 60px;
+    font-size: 16pt;
+  }
+
+  .stats {
+    width: 60px;
+    height: 60px;
+    font-size: 12pt;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .cell-button {
+    width: 40px;
+    height: 40px;
+    font-size: 14pt;
+  }
+
+  .stats {
+    width: 40px;
+    height: 40px;
+    font-size: 10pt;
+  }
 }
