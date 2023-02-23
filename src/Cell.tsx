@@ -17,10 +17,6 @@ export const Cell = (props: CellProps) => {
 
     let voltorbImage = process.env.PUBLIC_URL + "/voltorb.png"
 
-    if (props.showDead) {
-        parentClassName += " dead"
-    }
-
     let finished = props.gridState !== GridState.Pending
 
     if (finished) {
@@ -31,6 +27,9 @@ export const Cell = (props: CellProps) => {
             contents = <img src={voltorbImage} alt="voltorb" />
             className += " voltorb"
         }
+    }
+    else if (props.showDead) {
+        parentClassName += " dead"
     }
 
     if (cell.flipped) {
@@ -45,9 +44,7 @@ export const Cell = (props: CellProps) => {
 
     return (
         <div className={parentClassName}>
-            <div
-                className={className}
-                onClick={props.flipCell}>
+            <div className={className} onClick={props.flipCell}>
                 {contents}
             </div>
         </div>

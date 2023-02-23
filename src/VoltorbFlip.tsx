@@ -105,10 +105,12 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
                     content="Highlight cells that MUST contain either 1 coin or a Voltorb, based on current information."
                     position="bottom right"
                     mouseEnterDelay={500}
+                    disabled={state !== GridState.Pending}
                     trigger={
                     <Checkbox
                         className="option-checkbox"
                         label="Show dead cells"
+                        disabled={state !== GridState.Pending}
                         checked={showDeadCells}
                         onChange={(e, data) => setShowDeadCells(data.checked ?? false)} />
                 } />
