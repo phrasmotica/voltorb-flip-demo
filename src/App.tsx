@@ -71,6 +71,10 @@ const App = () => {
                     nextLevel={nextLevel}
                     reset={reset} />
             </header>
+
+            <footer>
+                <a href="https://www.icons101.com/icon/id_60093/setid_928/Pokemon_by_HEKTakun/100_Voltorb" title="voltorb icon">Voltorb icon created by HEKTakun - Icons101</a>
+            </footer>
         </div>
     )
 }

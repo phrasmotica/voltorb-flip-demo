@@ -42,28 +42,41 @@ h4 {
 }
 
 /* TODO: make these look nicer on devices of different sizes */
-.ui.button.cell-button {
+.cell-button {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 40px;
   height: 40px;
-  padding: 0px;
-  margin-right: 0px;
+  border: 1px solid white;
+  border-radius: calc(2rem / 7);
+  cursor: pointer;
+  font-size: 14pt;
 }
 
-.ui.button.cell-button.shown {
-  background-color: pink;
+.cell-button:hover {
+  background-color: rgba(211, 211, 211, 0.5);
 }
 
-.ui.button.cell-button.flipped {
+.cell-button.shown {
+  background-color: rgb(255, 125, 147);
+  cursor: default;
+}
+
+.cell-button.flipped {
   opacity: 1!important;
-  background-color: pink;
+  background-color: rgb(255, 125, 147);
+  cursor: default;
 }
 
-.ui.button.cell-button.voltorb {
+.cell-button.voltorb {
   opacity: 1!important;
   background-color: red;
+  cursor: default;
+}
+
+.cell-button.voltorb > img {
+  width: 100%;
 }
 
 .stats {

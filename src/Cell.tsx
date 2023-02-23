@@ -1,5 +1,3 @@
-import { Button } from "semantic-ui-react"
-
 import { GridState, VoltorbFlipCell } from "./VoltorbFlipGrid"
 
 interface CellProps {
@@ -17,6 +15,8 @@ export const Cell = (props: CellProps) => {
     let contents = <span>?</span>
     let className = "cell-button"
 
+    let voltorbImage = process.env.PUBLIC_URL + "/voltorb.png"
+
     if (props.showDead) {
         parentClassName += " dead"
     }
@@ -28,7 +28,7 @@ export const Cell = (props: CellProps) => {
         className += " shown"
 
         if (cell.value === 0) {
-            contents = <span>V</span>
+            contents = <img src={voltorbImage} alt="voltorb" />
             className += " voltorb"
         }
     }
@@ -38,19 +38,18 @@ export const Cell = (props: CellProps) => {
         className += " flipped"
 
         if (cell.value === 0) {
-            contents = <span>V</span>
+            contents = <img src={voltorbImage} alt="voltorb" />
             className += " voltorb"
         }
     }
 
     return (
         <div className={parentClassName}>
-            <Button
+            <div
                 className={className}
-                disabled={finished || cell.flipped}
                 onClick={props.flipCell}>
                 {contents}
-            </Button>
+            </div>
         </div>
     )
 }

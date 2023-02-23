@@ -125,8 +125,6 @@ export class VoltorbFlipGrid {
 
         shuffleArray(cells)
 
-        console.log(cells)
-
         for (let i = 0; i < parameters.size; i++) {
             let newRow: VoltorbFlipCell[] = []
 
