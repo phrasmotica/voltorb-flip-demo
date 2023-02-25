@@ -105,16 +105,10 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
                         </PButton>
                     } />
 
-                <Popup
-                    content="Start a new game from level 1."
-                    position="top center"
-                    mouseEnterDelay={500}
-                    trigger={
-                        <PButton
-                            onClick={props.reset}>
-                            Reset
-                        </PButton>
-                    } />
+                <PButton
+                    onClick={props.reset}>
+                    Reset
+                </PButton>
 
                 <Popup
                     content="Highlight cells that MUST contain either 1 coin or a Voltorb, based on current information."

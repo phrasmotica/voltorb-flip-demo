@@ -68,6 +68,33 @@ h4 {
   background-color: rgba(211, 211, 211, 0.5);
 }
 
+.pbutton.green {
+  color: white;
+  background-color: #21ba45;
+}
+
+.pbutton.green:hover {
+  background-color: #16ab39;
+}
+
+.pbutton.red {
+  color: white;
+  background-color: #db2828;
+}
+
+.pbutton.red:hover {
+  background-color: #d01919;
+}
+
+.pbutton > .icon {
+  opacity: 0.8;
+}
+
+.ui.modal > .actions > .pbutton {
+  display: inline;
+  margin-left: 0.75em;
+}
+
 .cell-button {
   width: 80px;
   height: 80px;

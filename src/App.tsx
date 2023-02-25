@@ -1,5 +1,6 @@
 import { useState } from "react"
 
+import { ResetModal } from "./ResetModal"
 import { VoltorbFlip } from "./VoltorbFlip"
 import { GridState, VoltorbFlipGrid } from "./VoltorbFlipGrid"
 
@@ -12,6 +13,8 @@ const App = () => {
     const [score, setScore] = useState(0)
     const [streak, setStreak] = useState(0)
     const [grid, setGrid] = useState(newGrid(level))
+
+    const [showResetModal, setShowResetModal] = useState(false)
 
     const flipCell = (row: number, col: number) => {
         grid.getCell(row, col).flip()
@@ -49,7 +52,7 @@ const App = () => {
         setGrid(newGrid(newLevel))
     }
 
-    const reset = () => {
+    const resetGame = () => {
         setLevel(1)
         setScore(0)
         setStreak(0)
@@ -58,6 +61,11 @@ const App = () => {
 
     return (
         <div className="App">
+            <ResetModal
+                open={showResetModal}
+                setOpen={setShowResetModal}
+                resetGame={resetGame} />
+
             <header className="App-header">
                 <h1>Voltorb Flip</h1>
 
@@ -70,7 +78,7 @@ const App = () => {
                     grid={grid}
                     flipCell={flipCell}
                     nextLevel={nextLevel}
-                    reset={reset} />
+                    reset={() => setShowResetModal(true)} />
             </header>
 
             <footer>

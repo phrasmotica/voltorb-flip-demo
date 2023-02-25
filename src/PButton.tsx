@@ -1,7 +1,10 @@
 import { PropsWithChildren } from "react"
 
+type Colour = "green" | "red"
+
 interface PButtonProps {
     className?: string
+    colour?: Colour
     disabled?: boolean
     onClick?: () => void
 }
@@ -11,6 +14,10 @@ export const PButton = (props: PropsWithChildren<PButtonProps>) => {
 
     if (props.className) {
         className += ` ${props.className}`
+    }
+
+    if (props.colour) {
+        className += ` ${props.colour}`
     }
 
     if (props.disabled) {
