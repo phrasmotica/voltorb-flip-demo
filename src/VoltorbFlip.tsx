@@ -50,7 +50,7 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
 
     const renderGridState = (grid: VoltorbFlipGrid) => (
         <div className="grid-state">
-            <div style={{ textAlign: "start" }}>
+            <div>
                 <div>
                     Level: {props.level}
                 </div>
@@ -60,17 +60,32 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
                 </div>
             </div>
 
-            <div style={{ textAlign: "end" }}>
+            <div>
                 <div>
-                    Coins: {props.score}
+                    Total coins: {props.score}
                 </div>
 
                 <div>
-                    Coins this round: {grid?.getScore() ?? 0}
+                    Coins this round: {getCoinsThisRoundStr(grid)}
                 </div>
             </div>
         </div>
     )
+
+    const getCoinsThisRoundStr = (grid: VoltorbFlipGrid) => {
+        let flippedMultipliers = grid.getFlippedMultipliers().filter(c => c.value > 1)
+
+        if (flippedMultipliers.length === 0) {
+            return "0"
+        }
+
+        if (flippedMultipliers.length === 1) {
+            return `${flippedMultipliers[0].value}`
+        }
+
+        let calc = flippedMultipliers.map(c => c.value).join(" x ")
+        return calc + " = " + grid.getScore()
+    }
 
     const renderGridOptions = (grid: VoltorbFlipGrid) => {
         let state = grid?.getState()
@@ -79,41 +94,41 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
             <div className="grid-options">
                 <Popup
                     content="Move to the next level!"
-                    position="bottom left"
+                    position="top left"
                     mouseEnterDelay={500}
                     disabled={state === GridState.Pending}
                     trigger={
-                    <PButton
-                        disabled={state === GridState.Pending}
-                        onClick={() => props.nextLevel(grid)}>
-                        Next Level
-                    </PButton>
-                } />
+                        <PButton
+                            disabled={state === GridState.Pending}
+                            onClick={() => props.nextLevel(grid)}>
+                            Next Level
+                        </PButton>
+                    } />
 
                 <Popup
                     content="Start a new game from level 1."
-                    position="bottom center"
+                    position="top center"
                     mouseEnterDelay={500}
                     trigger={
-                    <PButton
-                        onClick={props.reset}>
-                        Reset
-                    </PButton>
-                } />
+                        <PButton
+                            onClick={props.reset}>
+                            Reset
+                        </PButton>
+                    } />
 
                 <Popup
                     content="Highlight cells that MUST contain either 1 coin or a Voltorb, based on current information."
-                    position="bottom right"
+                    position="top right"
                     mouseEnterDelay={500}
                     disabled={state !== GridState.Pending}
                     trigger={
-                    <Checkbox
-                        className="option-checkbox"
-                        label="Show dead cells"
-                        disabled={state !== GridState.Pending}
-                        checked={showDeadCells}
-                        onChange={(e, data) => setShowDeadCells(data.checked ?? false)} />
-                } />
+                        <Checkbox
+                            className="option-checkbox"
+                            label="Show dead cells"
+                            disabled={state !== GridState.Pending}
+                            checked={showDeadCells}
+                            onChange={(e, data) => setShowDeadCells(data.checked ?? false)} />
+                    } />
             </div>
         )
     }

@@ -38,7 +38,7 @@ const App = () => {
         }
 
         if (state === GridState.Lost) {
-            let numFlippedMultipliers = grid.getNumberOfFlippedMultipliers()
+            let numFlippedMultipliers = grid.getFlippedMultipliers().length
             if (numFlippedMultipliers < level) {
                 newLevel = Math.max(1, Math.min(8, level, numFlippedMultipliers))
             }
@@ -51,6 +51,7 @@ const App = () => {
 
     const reset = () => {
         setLevel(1)
+        setScore(0)
         setStreak(0)
         setGrid(newGrid(1))
     }
