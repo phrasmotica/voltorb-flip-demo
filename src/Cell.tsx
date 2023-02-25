@@ -20,32 +20,31 @@ export const Cell = (props: CellProps) => {
 
     let finished = props.gridState !== GridState.Pending
 
-    if (finished) {
-        contents = <span>{cell.value}</span>
-        className += " shown"
-
-        if (cell.value === 0) {
-            contents = <img src={voltorbImage} alt="voltorb" />
-            className += " voltorb"
-        }
-    }
-    else if (props.showDead) {
-        parentClassName += " dead"
-    }
-
     if (cell.flipped) {
         contents = <span>{cell.value}</span>
         className += " flipped"
 
         if (cell.value === 0) {
             contents = <img src={voltorbImage} alt="voltorb" />
-            className += " voltorb"
         }
+    }
+    else if (finished) {
+        contents = <span>{cell.value}</span>
+        className += " shown"
+
+        if (cell.value === 0) {
+            contents = <img src={voltorbImage} alt="voltorb" />
+        }
+    }
+    else if (props.showDead) {
+        parentClassName += " dead"
     }
 
     return (
         <div className={parentClassName}>
-            <PButton className={className} onClick={props.flipCell}>
+            <PButton
+                className={className}
+                onClick={props.flipCell}>
                 {contents}
             </PButton>
         </div>

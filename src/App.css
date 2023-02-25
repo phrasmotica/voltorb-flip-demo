@@ -68,23 +68,23 @@ h4 {
 }
 
 .cell-button.shown {
-  background-color: rgb(255, 125, 147);
   cursor: default;
+}
+
+.cell-button.shown:hover {
+  background-color: unset;
 }
 
 .cell-button.flipped {
-  opacity: 1!important;
+  cursor: default;
   background-color: rgb(255, 125, 147);
-  cursor: default;
 }
 
-.cell-button.voltorb {
-  opacity: 1!important;
-  background-color: red;
-  cursor: default;
+.cell-button.flipped:hover {
+  background-color: rgb(255, 125, 147);
 }
 
-.cell-button.voltorb > img {
+.cell-button > img {
   width: 100%;
 }
 
