@@ -88,19 +88,30 @@ h4 {
   width: 100%;
 }
 
+/* TODO: make these more responsive */
 .stats {
   font-size: 10pt;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 3px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0px 0px 6px 15px;
   text-align: center;
-  border: 2px dashed white;
+  border: 1px solid white;
   border-radius: calc(2rem / 7);
   width: 80px;
   height: 80px;
   background-color: green;
   font-size: 16pt;
+}
+
+.stats .voltorb-indicator {
+  display: flex;
+  align-items: center;
+}
+
+.stats img {
+  width: 2em;
 }
 
 .grid-state {
@@ -132,6 +143,7 @@ h4 {
     width: 60px;
     height: 60px;
     font-size: 12pt;
+    padding: 0px 0px 1px 11px;
   }
 }
 
@@ -146,5 +158,14 @@ h4 {
     width: 40px;
     height: 40px;
     font-size: 10pt;
+    padding: 0px 0px 0px 8px;
+  }
+
+  .stats > .total-indicator {
+    height: 16px;
+  }
+
+  .stats img {
+    width: 16px;
   }
 }
