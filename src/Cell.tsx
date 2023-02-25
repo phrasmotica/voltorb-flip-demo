@@ -44,6 +44,7 @@ export const Cell = (props: CellProps) => {
         <div className={parentClassName}>
             <PButton
                 className={className}
+                frozen={finished || cell.flipped}
                 onClick={props.flipCell}>
                 {contents}
             </PButton>

@@ -6,6 +6,7 @@ interface PButtonProps {
     className?: string
     colour?: Colour
     disabled?: boolean
+    frozen?: boolean
     onClick?: () => void
 }
 
@@ -24,7 +25,7 @@ export const PButton = (props: PropsWithChildren<PButtonProps>) => {
         className += " disabled"
     }
 
-    const click = props.disabled ? undefined : props.onClick
+    const click = (props.frozen || props.disabled) ? undefined : props.onClick
 
     return (
         <div className={className} onClick={click}>
