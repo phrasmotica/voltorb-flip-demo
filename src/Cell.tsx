@@ -1,14 +1,23 @@
+import { useEffect, useState } from "react"
+
 import { PButton } from "./PButton"
 import { GridState, VoltorbFlipCell } from "./VoltorbFlipGrid"
 
 interface CellProps {
     cell: VoltorbFlipCell
     gridState: GridState
+    showHighlighted: boolean
     showDead: boolean
     flipCell: () => void
 }
 
 export const Cell = (props: CellProps) => {
+    const [highlighted, setHighlighted] = useState(false)
+
+    useEffect(() => {
+        setHighlighted(props.showHighlighted)
+    }, [props.showHighlighted])
+
     let cell = props.cell
 
     let parentClassName = "flip-grid-cell"
@@ -27,6 +36,9 @@ export const Cell = (props: CellProps) => {
         if (cell.value === 0) {
             contents = <img src={voltorbImage} alt="voltorb" />
         }
+    }
+    else if (highlighted) {
+        className += " highlighted"
     }
     else if (finished) {
         contents = <span>{cell.value}</span>

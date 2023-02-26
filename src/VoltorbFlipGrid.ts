@@ -215,6 +215,47 @@ export class VoltorbFlipGrid {
     getFlippedMultipliers() {
         return this.grid.flatMap(row => row).filter(c => c.value > 0 && c.flipped)
     }
+
+    computeHints() {
+        let coords = [] as [number, number][]
+
+        let maxMeanScore = 0
+
+        this.grid.forEach((row, i) => {
+            row.forEach((cell, j) => {
+                if (!cell.flipped) {
+                    let meanScore = this.computeMeanScore(i, j)
+                    maxMeanScore = Math.max(maxMeanScore, meanScore)
+                }
+            })
+        })
+
+        this.grid.forEach((row, i) => {
+            row.forEach((cell, j) => {
+                if (!cell.flipped) {
+                    let meanScore = this.computeMeanScore(i, j)
+                    if (meanScore === maxMeanScore) {
+                        coords.push([i, j])
+                    }
+                }
+            })
+        })
+
+        return coords
+    }
+
+    computeMeanScore(row: number, col: number) {
+        let rowVoltorbCount = this.countVoltorbsInRow(row)
+        let colVoltorbCount = this.countVoltorbsInCol(col)
+
+        if (rowVoltorbCount === 0 || colVoltorbCount === 0) {
+            return 100 // nominal "max" value
+        }
+
+        let meanRowScore = this.getRowTotal(row) / rowVoltorbCount
+        let meanColScore = this.getColTotal(col) / colVoltorbCount
+        return meanRowScore * meanColScore
+    }
 }
 
 export class VoltorbFlipCell {

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Popup } from "semantic-ui-react"
 import Checkbox from "semantic-ui-react/dist/commonjs/modules/Checkbox"
 
@@ -18,7 +18,14 @@ interface VoltorbFlipProps {
 }
 
 export const VoltorbFlip = (props: VoltorbFlipProps) => {
+    const [hintCoords, setHintCoords] = useState<[number, number][]>([])
     const [showDeadCells, setShowDeadCells] = useState(false)
+
+    useEffect(() => {
+        if (props.grid.getState() !== GridState.Pending) {
+            setHintCoords([])
+        }
+    }, [props.grid])
 
     const renderGrid = (grid: VoltorbFlipGrid) => {
         return (
@@ -41,11 +48,17 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
     const renderCell = (grid: VoltorbFlipGrid, row: number, col: number) => {
         let cell = grid.getCell(row, col)
         let gridState = grid.getState()
+        let showHighlighted = hintCoords.some(c => c[0] === row && c[1] === col)
         let showDead = !cell.flipped && showDeadCells && (grid.rowIsDead(row) || grid.colIsDead(col))
 
         const flipCell = () => props.flipCell(row, col)
 
-        return <Cell cell={cell} gridState={gridState} showDead={showDead} flipCell={flipCell} />
+        return <Cell
+            cell={cell}
+            gridState={gridState}
+            showHighlighted={showHighlighted}
+            showDead={showDead}
+            flipCell={flipCell} />
     }
 
     const renderGridState = (grid: VoltorbFlipGrid) => (
@@ -100,15 +113,27 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
                     trigger={
                         <PButton
                             disabled={state === GridState.Pending}
-                            onClick={() => props.nextLevel(grid)}>
+                            onClick={() => nextLevel(grid)}>
                             Next Level
                         </PButton>
                     } />
 
-                <PButton
-                    onClick={props.reset}>
+                <PButton onClick={reset}>
                     Reset
                 </PButton>
+
+                <Popup
+                    content="Recommends a tile to flip."
+                    position="top center"
+                    mouseEnterDelay={500}
+                    disabled={state !== GridState.Pending}
+                    trigger={
+                        <PButton
+                            disabled={state !== GridState.Pending || hintCoords.length > 0}
+                            onClick={() => showHints(grid)}>
+                            Show Hint
+                        </PButton>
+                    } />
 
                 <Popup
                     content="Highlight cells that MUST contain either 1 coin or a Voltorb, based on current information."
@@ -125,6 +150,21 @@ export const VoltorbFlip = (props: VoltorbFlipProps) => {
                     } />
             </div>
         )
+    }
+
+    const nextLevel = (grid: VoltorbFlipGrid) => {
+        setHintCoords([])
+        props.nextLevel(grid)
+    }
+
+    const reset = () => {
+        setHintCoords([])
+        props.reset()
+    }
+
+    const showHints = (grid: VoltorbFlipGrid) => {
+        let hintCoords = grid.computeHints()
+        setHintCoords(hintCoords)
     }
 
     return (
