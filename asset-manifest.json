@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/voltorb-flip-demo/static/css/main.99d05363.chunk.css",
-    "main.js": "/voltorb-flip-demo/static/js/main.ec0f9469.chunk.js",
-    "main.js.map": "/voltorb-flip-demo/static/js/main.ec0f9469.chunk.js.map",
-    "runtime-main.js": "/voltorb-flip-demo/static/js/runtime-main.93e71508.js",
-    "runtime-main.js.map": "/voltorb-flip-demo/static/js/runtime-main.93e71508.js.map",
-    "static/js/2.f957019f.chunk.js": "/voltorb-flip-demo/static/js/2.f957019f.chunk.js",
-    "static/js/2.f957019f.chunk.js.map": "/voltorb-flip-demo/static/js/2.f957019f.chunk.js.map",
-    "static/js/3.38358f4d.chunk.js": "/voltorb-flip-demo/static/js/3.38358f4d.chunk.js",
-    "static/js/3.38358f4d.chunk.js.map": "/voltorb-flip-demo/static/js/3.38358f4d.chunk.js.map",
+    "main.css": "/voltorb-flip-demo/static/css/main.d5c98a67.chunk.css",
+    "main.js": "/voltorb-flip-demo/static/js/main.d22c98b3.chunk.js",
+    "main.js.map": "/voltorb-flip-demo/static/js/main.d22c98b3.chunk.js.map",
+    "runtime-main.js": "/voltorb-flip-demo/static/js/runtime-main.eb620045.js",
+    "runtime-main.js.map": "/voltorb-flip-demo/static/js/runtime-main.eb620045.js.map",
+    "static/js/2.b6295aa1.chunk.js": "/voltorb-flip-demo/static/js/2.b6295aa1.chunk.js",
+    "static/js/2.b6295aa1.chunk.js.map": "/voltorb-flip-demo/static/js/2.b6295aa1.chunk.js.map",
+    "static/js/3.0de1bd5f.chunk.js": "/voltorb-flip-demo/static/js/3.0de1bd5f.chunk.js",
+    "static/js/3.0de1bd5f.chunk.js.map": "/voltorb-flip-demo/static/js/3.0de1bd5f.chunk.js.map",
     "index.html": "/voltorb-flip-demo/index.html",
-    "static/css/main.99d05363.chunk.css.map": "/voltorb-flip-demo/static/css/main.99d05363.chunk.css.map",
-    "static/js/2.f957019f.chunk.js.LICENSE.txt": "/voltorb-flip-demo/static/js/2.f957019f.chunk.js.LICENSE.txt"
+    "static/css/main.d5c98a67.chunk.css.map": "/voltorb-flip-demo/static/css/main.d5c98a67.chunk.css.map",
+    "static/js/2.b6295aa1.chunk.js.LICENSE.txt": "/voltorb-flip-demo/static/js/2.b6295aa1.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.93e71508.js",
-    "static/js/2.f957019f.chunk.js",
-    "static/css/main.99d05363.chunk.css",
-    "static/js/main.ec0f9469.chunk.js"
+    "static/js/runtime-main.eb620045.js",
+    "static/js/2.b6295aa1.chunk.js",
+    "static/css/main.d5c98a67.chunk.css",
+    "static/js/main.d22c98b3.chunk.js"
   ]
 }
